@@ -14,5 +14,11 @@
         <module>restclient</module>
     </modules>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
+        <jpa.verson>1.3</jpa.verson>
+        <hibernate.version>5.3.7.Final</hibernate.version>
+    </properties>
 
 </project>
