@@ -68,6 +68,10 @@ public class User {
         return portfolios;
     }
 
+    public void setPortfolios(Set<Portfolio> portfolios) {
+        this.portfolios = portfolios;
+    }
+
     public Portfolio getDefaultPortfolio() {
         if (defaultPortfolio == null) {
             for (Portfolio portfolio : portfolios) {
@@ -78,10 +82,6 @@ public class User {
             }
         }
         return defaultPortfolio;
-    }
-
-    public void setPortfolios(Set<Portfolio> portfolios) {
-        this.portfolios = portfolios;
     }
 
     @Override
