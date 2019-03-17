@@ -1,6 +1,6 @@
 package com.balakumar.pm.datamodel.services;
 
-import com.balakumar.pm.datamodel.spring.DataModelConfig;
+import com.balakumar.pm.datamodel.DataModelConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public final class ServiceFactory {

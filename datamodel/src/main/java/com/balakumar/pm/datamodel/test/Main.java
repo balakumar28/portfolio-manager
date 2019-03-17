@@ -10,7 +10,7 @@ import com.balakumar.pm.datamodel.services.UserService;
 import java.util.Calendar;
 import java.util.Set;
 
-import static com.balakumar.pm.datamodel.spring.Constants.DEFAULT_PORTFOLIO;
+import static com.balakumar.pm.datamodel.Constants.DEFAULT_PORTFOLIO;
 
 public class Main {
 

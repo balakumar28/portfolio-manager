@@ -3,7 +3,7 @@ package com.balakumar.pm.datamodel.objects;
 import javax.persistence.*;
 import java.util.Set;
 
-import static com.balakumar.pm.datamodel.spring.Constants.DEFAULT_PORTFOLIO;
+import static com.balakumar.pm.datamodel.Constants.DEFAULT_PORTFOLIO;
 
 @Entity
 @Table(name = "Users")

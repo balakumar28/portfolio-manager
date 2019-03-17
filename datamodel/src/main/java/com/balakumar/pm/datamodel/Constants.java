@@ -1,4 +1,4 @@
-package com.balakumar.pm.datamodel.spring;
+package com.balakumar.pm.datamodel;
 
 public final class Constants {
 

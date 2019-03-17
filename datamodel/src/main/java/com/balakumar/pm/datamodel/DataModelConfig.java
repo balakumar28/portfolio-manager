@@ -1,4 +1,4 @@
-package com.balakumar.pm.datamodel.spring;
+package com.balakumar.pm.datamodel;
 
 import com.balakumar.pm.datamodel.services.PortfolioService;
 import com.balakumar.pm.datamodel.services.ScripService;
