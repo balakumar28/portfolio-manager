@@ -22,6 +22,11 @@
             <artifactId>javax.transaction-api</artifactId>
             <version>${jpa.verson}</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgres.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
