@@ -1,15 +1,13 @@
 package com.balakumar.pm.datamodel.services;
 
-import com.balakumar.pm.datamodel.objects.User;
 import com.balakumar.pm.datamodel.spring.DataModelConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public final class ServiceFactory {
 
     private static AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DataModelConfig.class);
 
-    private ServiceFactory(){
+    private ServiceFactory() {
     }
 
     public static ScripService getScripService() {

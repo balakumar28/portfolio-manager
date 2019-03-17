@@ -69,8 +69,8 @@ public class User {
     }
 
     public Portfolio getDefaultPortfolio() {
-        if(defaultPortfolio == null) {
-            for(Portfolio portfolio: portfolios) {
+        if (defaultPortfolio == null) {
+            for (Portfolio portfolio : portfolios) {
                 if (portfolio.getName().equals(DEFAULT_PORTFOLIO)) {
                     defaultPortfolio = portfolio;
                     break;

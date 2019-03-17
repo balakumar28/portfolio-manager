@@ -4,7 +4,6 @@ import com.balakumar.pm.datamodel.services.PortfolioService;
 import com.balakumar.pm.datamodel.services.ScripService;
 import com.balakumar.pm.datamodel.services.UserService;
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,11 +46,6 @@ public class DataModelConfig {
     @Value("${" + PROPERTY_HBM2DDL_AUTO + "}")
     private String hibernateHbm2ddlAuto;
 
-//    @Autowired
-//    private ScripService scripService;
-//    @Autowired
-//    private UserService userService;
-
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -91,7 +85,7 @@ public class DataModelConfig {
     }
 
     @Bean
-    public UserService userService(UserService userService){
+    public UserService userService(UserService userService) {
         return userService;
     }
 

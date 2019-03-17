@@ -42,8 +42,8 @@ public class Main {
         portfolio.getScrips().add(mutualFund);
 
         Set<Portfolio> portfolioSet = user.getPortfolios();
-        for(Portfolio p: portfolioSet) {
-            if(p.getName().equals("Stocks")) {
+        for (Portfolio p : portfolioSet) {
+            if (p.getName().equals("Stocks")) {
                 p.getScrips().add(stock);
             }
         }
