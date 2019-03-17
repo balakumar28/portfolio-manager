@@ -24,18 +24,22 @@ import java.util.Properties;
 @PropertySource(value = {"classpath:application-config.properties"})
 public class DataModelConfig {
 
-    private final String PROPERTY_SHOW_SQL = "hibernate.show_sql";
-    private final String PROPERTY_DIALECT = "hibernate.dialect";
-    private final String PROPERTY_META_DEFAULT = "hibernate.temp.use_jdbc_metadata_defaults";
-    private final String PROPERTY_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
+    private static final String PROPERTY_DB_DRIVER = "db.driver";
+    private static final String PROPERTY_DB_URL = "db.url";
+    private static final String PROPERTY_DB_USERNAME = "db.username";
+    private static final String PROPERTY_DB_PASSWORD = "db.password";
+    private static final String PROPERTY_SHOW_SQL = "hibernate.show_sql";
+    private static final String PROPERTY_DIALECT = "hibernate.dialect";
+    private static final String PROPERTY_META_DEFAULT = "hibernate.temp.use_jdbc_metadata_defaults";
+    private static final String PROPERTY_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 
-    @Value("${db.driver}")
+    @Value("${" + PROPERTY_DB_DRIVER + "}")
     private String dbDriver;
-    @Value("${db.url}")
+    @Value("${" + PROPERTY_DB_URL + "}")
     private String dbUrl;
-    @Value("${db.username}")
+    @Value("${" + PROPERTY_DB_USERNAME + "}")
     private String dbUsername;
-    @Value("${db.password}")
+    @Value("${" + PROPERTY_DB_PASSWORD + "}")
     private String dbPassword;
     @Value("${" + PROPERTY_SHOW_SQL + "}")
     private String hibernateShowSql;
