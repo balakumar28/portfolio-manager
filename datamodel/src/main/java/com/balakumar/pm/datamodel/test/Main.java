@@ -24,7 +24,7 @@ public class Main {
     }
 
     private static void updatePortfolio() {
-        User user = userService.findByEmail("balakumar@pm.com");
+        User user = userService.findByEmail("balakumar@pm.com").get();
         Stock stock = new Stock();
         stock.setCode("TCS");
         stock.setName("Tata Consultancy Services");
@@ -51,7 +51,7 @@ public class Main {
     }
 
     private static void createPortfolios() {
-        User user = userService.findByEmail("balakumar@pm.com");
+        User user = userService.findByEmail("balakumar@pm.com").get();
         Portfolio portfolio = new Portfolio();
         portfolio.setName(DEFAULT_PORTFOLIO);
         portfolio.setUser(user);

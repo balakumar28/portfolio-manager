@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "type")
 public class Scrip implements Serializable {
 
     @Id
