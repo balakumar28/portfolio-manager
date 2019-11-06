@@ -10,16 +10,8 @@ public final class ServiceFactory {
     private ServiceFactory() {
     }
 
-    public static ScripService getScripService() {
-        return (ScripService) context.getBean("scripService");
-    }
-
-    public static UserService getUserService() {
-        return (UserService) context.getBean("userService");
-    }
-
-    public static PortfolioService getPortfolioService() {
-        return (PortfolioService) context.getBean("portfolioService");
+    public static <T> T getService(Service service) {
+        return (T) context.getBean(service.getServiceName());
     }
 
 }

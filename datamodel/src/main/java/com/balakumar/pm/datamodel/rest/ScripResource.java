@@ -1,20 +1,11 @@
 package com.balakumar.pm.datamodel.rest;
 
-import com.balakumar.pm.datamodel.Constants;
 import com.balakumar.pm.datamodel.objects.Scrip;
 import com.balakumar.pm.datamodel.services.ScripService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static com.balakumar.pm.datamodel.Constants.REST_CODE;
-import static com.balakumar.pm.datamodel.Constants.REST_SAVE;
-import static com.balakumar.pm.datamodel.Constants.REST_SCRIP;
+import static com.balakumar.pm.datamodel.Constants.*;
 
 @RestController
 @RequestMapping(REST_SCRIP)

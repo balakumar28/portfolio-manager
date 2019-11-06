@@ -1,15 +1,9 @@
 package com.balakumar.pm.datamodel.rest;
 
-import com.balakumar.pm.datamodel.Constants;
 import com.balakumar.pm.datamodel.objects.Portfolio;
 import com.balakumar.pm.datamodel.services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.balakumar.pm.datamodel.Constants.REST_PORTFOLIO;
 import static com.balakumar.pm.datamodel.Constants.REST_SAVE;

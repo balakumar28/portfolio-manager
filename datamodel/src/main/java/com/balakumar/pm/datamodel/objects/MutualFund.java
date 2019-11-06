@@ -17,6 +17,7 @@ public class MutualFund extends Scrip {
 
     public void setNav(double nav) {
         this.nav = nav;
+        setValue(nav);
     }
 
     @Override

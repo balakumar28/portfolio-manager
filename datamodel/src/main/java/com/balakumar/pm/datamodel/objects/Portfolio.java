@@ -15,7 +15,7 @@ public class Portfolio {
     @Column(nullable = false)
     private String name;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Scrip> scrips;
+    private Set<Transaction> transactions;
 
     public Long getId() {
         return id;
@@ -41,12 +41,12 @@ public class Portfolio {
         this.name = name;
     }
 
-    public Set<Scrip> getScrips() {
-        return scrips;
+    public Set<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setScrips(Set<Scrip> scrips) {
-        this.scrips = scrips;
+    public void setTransactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Portfolio {
         return "Portfolio{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", scrips=" + scrips +
+                ", transactions=" + transactions +
                 '}';
     }
 }
