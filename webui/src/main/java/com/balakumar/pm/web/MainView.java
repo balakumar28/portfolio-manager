@@ -45,11 +45,11 @@ public class MainView extends VerticalLayout {
     private void defineGrid() {
         dataGrid = new Grid<>(Transaction.class);
         dataGrid.removeAllColumns();
-        dataGrid.addColumn(Transaction::getDate);
+        dataGrid.addColumns("date");
         dataGrid.addColumn(t -> t.getScrip().getName()).setHeader("Name").setKey("name");
-        dataGrid.addColumn(Transaction::getQty);
-        dataGrid.addColumn(Transaction::getCostPerUnit);
-        dataGrid.addColumn(Transaction::getValue);
+        dataGrid.addColumns("qty", "costPerUnit", "value");
+//        dataGrid.addColumn(Transaction::getCostPerUnit);
+//        dataGrid.addColumn(Transaction::getValue);
         add(dataGrid);
     }
 
