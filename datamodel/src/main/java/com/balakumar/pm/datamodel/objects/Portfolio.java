@@ -1,5 +1,7 @@
 package com.balakumar.pm.datamodel.objects;
 
+import com.balakumar.pm.datamodel.Constants;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -16,6 +18,8 @@ public class Portfolio {
     private String name;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Transaction> transactions;
+
+    public static final String DEFAULT_PORTFOLIO = Constants.DEFAULT_PORTFOLIO;
 
     public Long getId() {
         return id;
