@@ -5,27 +5,43 @@ import com.balakumar.pm.datamodel.objects.Transaction;
 import com.balakumar.pm.datamodel.objects.User;
 import com.balakumar.pm.datamodel.services.PortfolioService;
 import com.balakumar.pm.datamodel.services.UserService;
+import com.balakumar.pm.utils.Constants;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.login.AbstractLogin;
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Route
+@Transactional
 public class MainView extends VerticalLayout {
+
+    private static Logger logger = LoggerFactory.getLogger(MainView.class);
 
     private UserService userService;
     private PortfolioService portfolioService;
     private LoginOverlay loginOverlay;
 
+    private Label errorLabel;
+    private Div portfolioSelectDiv;
     private Select<String> portfolioSelect;
+    private TextField portfolioInput;
+    private Button deletePortfolioButton;
+    private Button createPortfolioButton;
     private Grid<Transaction> dataGrid;
 
     private User user;
@@ -35,11 +51,85 @@ public class MainView extends VerticalLayout {
     public MainView(UserService userResource, PortfolioService portfolioResource) {
         this.userService = userResource;
         this.portfolioService = portfolioResource;
-        portfolioSelect = new Select<>();
-        portfolioSelect.setLabel("Portfolio");
         validateLogin();
-        add(portfolioSelect);
+        defineErrorLabel();
+        definePortfolioSelect();
         defineGrid();
+    }
+
+    private void defineErrorLabel() {
+        errorLabel = new Label();
+        errorLabel.setVisible(false);
+        add(errorLabel);
+    }
+
+    private void definePortfolioSelect() {
+        portfolioSelect = new Select<>();
+        portfolioSelect.setLabel(Constants.PORTFOLIO);
+
+        portfolioInput = new TextField();
+        portfolioInput.setVisible(false);
+
+
+        createPortfolioButton = new Button(Constants.CREATE);
+        createPortfolioButton.addClickListener(event -> {
+            if (portfolioInput.isVisible()) {
+                try {
+                    createPortfolio(portfolioInput.getValue());
+                    portfolioInput.setVisible(false);
+                    createPortfolioButton.setText(Constants.CREATE);
+                    errorLabel.setVisible(false);
+                    refresh();
+                    portfolioSelect.setValue(portfolioInput.getValue());
+                    portfolioInput.clear();
+                } catch (Exception e) {
+                    errorLabel.setText("Cannot create portfolio with name " + portfolioInput.getValue());
+                    errorLabel.setVisible(true);
+                    e.printStackTrace();
+                }
+            } else {
+                portfolioInput.setVisible(true);
+                createPortfolioButton.setText(Constants.SUBMIT);
+            }
+        });
+
+        deletePortfolioButton = new Button(Constants.DELETE);
+        deletePortfolioButton.addClickListener(event -> {
+            try {
+                System.out.println("select portfolio " + portfolioSelect.getValue());
+                Portfolio portfolioToDelete = getPortfolioByName(portfolioSelect.getValue());
+                if (portfolioToDelete == null || portfolioToDelete.getName().equals(Portfolio.DEFAULT_PORTFOLIO)) {
+                    throw new Exception("Cannot delete default portfolio");
+                }
+                System.out.println("deleting portfolio " + portfolioToDelete.getName());
+                portfolioService.deleteById(portfolioToDelete.getId());
+                errorLabel.setVisible(false);
+//               refresh();
+            } catch (Exception e) {
+                errorLabel.setText("Failed to delete portfolio. " + e.getMessage());
+                errorLabel.setVisible(true);
+                e.printStackTrace();
+            }
+        });
+
+        portfolioSelectDiv = new Div();
+        portfolioSelectDiv.add(portfolioSelect);
+        portfolioSelectDiv.add(deletePortfolioButton);
+        portfolioSelectDiv.add(portfolioInput);
+        portfolioSelectDiv.add(createPortfolioButton);
+        add(portfolioSelectDiv);
+
+    }
+
+    private Portfolio getPortfolioByName(String name) {
+        return portfolios.stream().filter(p -> p.getName().equals(name)).findFirst().get();
+    }
+
+    private void createPortfolio(String value) {
+        Portfolio portfolio = new Portfolio();
+        portfolio.setName(value);
+        portfolio.setUser(user);
+        portfolioService.save(portfolio);
     }
 
     private void defineGrid() {
@@ -92,8 +182,8 @@ public class MainView extends VerticalLayout {
         validateLogin();
         if(user != null) {
             portfolios = portfolioService.findAllByUser(user);
-            portfolioSelect.setPlaceholder(Portfolio.DEFAULT_PORTFOLIO);
             portfolioSelect.setItems(portfolios.stream().map(p -> p.getName()).collect(Collectors.toList()));
+            portfolioSelect.setValue(Portfolio.DEFAULT_PORTFOLIO);
             portfolioSelect.addValueChangeListener(e -> populateGrid(e.getValue()));
             populateGrid(Portfolio.DEFAULT_PORTFOLIO);
         }

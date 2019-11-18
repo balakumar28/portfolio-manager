@@ -3,6 +3,7 @@ package com.balakumar.pm.datamodel.objects;
 import com.balakumar.pm.datamodel.Constants;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,8 +17,9 @@ public class Portfolio {
     private User user;
     @Column(nullable = false)
     private String name;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Transaction> transactions;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "portfolio_transactions", joinColumns = @JoinColumn(name = "portfolio_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "transactions_id", referencedColumnName = "id"))
+    private Set<Transaction> transactions = new HashSet<>();
 
     public static final String DEFAULT_PORTFOLIO = Constants.DEFAULT_PORTFOLIO;
 

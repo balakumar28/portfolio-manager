@@ -2,6 +2,8 @@ package com.balakumar.pm.datamodel.objects;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Transactions")
@@ -16,6 +18,16 @@ public class Transaction {
     private long qty;
     private double costPerUnit;
     private double value;
+    @ManyToMany(mappedBy = "transactions", fetch = FetchType.LAZY)
+    private Set<Portfolio> portfolios = new HashSet<>();
+
+    public Set<Portfolio> getPortfolios() {
+        return portfolios;
+    }
+
+    public void setPortfolios(Set<Portfolio> portfolios) {
+        this.portfolios = portfolios;
+    }
 
     public Long getId() {
         return id;
